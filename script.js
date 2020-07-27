@@ -85,7 +85,7 @@ let AddOBJModel = function (currentScene, objectName, textureName, posX, posY, p
 
     let textureLoader = new THREE.TextureLoader();
     textureLoader.setPath('./textures/');
-    let tmap = textureLoader.load(textureName, function (err) {
+    let map = textureLoader.load(textureName, function (err) {
         console.error('An error happened.');
     });
     let material = new THREE.MeshPhongMaterial({ map: tmap });
@@ -120,7 +120,6 @@ let AddPointCloudModel = function (currentScene, pcName, posX, posY, posZ, scale
         mesh.position.set(posX, posY, posZ);
         mesh.scale.set(scale, scale, scale);
         mesh.rotation.set(rotX, rotY, rotZ);
-        mesh.castShadow = true;
         mesh.receiveShadow = true;
 
         currentScene.add(mesh);
