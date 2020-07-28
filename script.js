@@ -131,7 +131,7 @@ Setup();
 SceneSetup();
 
 
-AddOBJModel(mainScene, 'Desktop4.obj', 'lq_kiz_texture copy.jpg', -6, 6, 0, 1, Math.PI, 0, 0);
+AddOBJModel(mainScene, 'Desktop4.obj', 'lq_kiz_texture.png', -6, 6, 0, 1, Math.PI, 0, 0);
 AddPointCloudModel(mainScene, 'tower_Dense_reconstruction.0.ply', 12, 6, -12, 1, 180 / 180 * Math.PI, -20 / 180 * Math.PI, 0);
 AddCubeMesh({ color: 0xddffff }, 2, mainScene);
 
