@@ -85,7 +85,7 @@ let AddOBJModel = function (currentScene, objectName, textureName, posX, posY, p
 
     let textureLoader = new THREE.TextureLoader();
     textureLoader.setPath('./textures/');
-    let map = textureLoader.load(textureName, function (err) {
+    let tmap = textureLoader.load(textureName, function (err) {
         console.error('An error happened.');
     });
     let material = new THREE.MeshPhongMaterial({ map: tmap });
