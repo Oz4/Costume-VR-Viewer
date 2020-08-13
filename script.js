@@ -256,10 +256,10 @@ let animate = function () {
 let renderVR = function () {
 
 
-    const rightEye = new THREE.Matrix4();
-    const leftEye = new THREE.Matrix4();
+    let rightEye = new THREE.Matrix4();
+    let leftEye = new THREE.Matrix4();
     console.log(camera.near / 12);
-    const aspect = camera.aspect * 0.5;
+    let aspect = camera.aspect * 0.5;
     let eyeSeperation = params['eyeSeperation'];
     let leftCamera = new THREE.PerspectiveCamera();
     leftCamera.matrixAutoUpdate = false;
@@ -270,8 +270,8 @@ let renderVR = function () {
     
     camera.updateMatrixWorld();
 
-    const projectionMatrix = camera.projectionMatrix.clone();
-    const  halfWidth  = (camera.near * Math.tan(Math.PI / 180 * camera.fov * 0.5));//  camera near * cemera apreture in radian degree
+    let projectionMatrix = camera.projectionMatrix.clone();
+    let  halfWidth  = (camera.near * Math.tan(Math.PI / 180 * camera.fov * 0.5));//  camera near * cemera apreture in radian degree
     let left, right;
 
     // adding the eyeseperation to matrix4 for transformation of the view(world matrix)
