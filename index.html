@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="#" />
+    <link type="text/css" rel="stylesheet" href="./three.js-master/examples/main.css">
+    <title></title>
+    <style>
+        #container {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        #background {
+            width: 100%;
+            height: 100%;
+
+            z-index: +1;
+            /* Ensure div tag stays behind content; -999 might work, too. */
+        }
+
+        .stretch {
+            width: 100%;
+            height: 110%;
+        }
+
+        canvas {
+        }
+    </style>
+</head>
+
+<body>
+    <script type="module" src="script.js"></script>
+    <div id="background" style="pointer-events: none;">
+        <img id = "vr_image" src="Vr_Overlay.png" class="stretch" alt="" style="position: absolute;pointer-events: none; " />
+    </div>
+    <div id="container">
+
+        <div id="button">
+
+        </div>
+    </div>
+    <div id="error" style="display: none;">
+        Your browser does not support
+    </div>
+</body>
+
+</html>
