@@ -8,7 +8,9 @@ import { VRButton } from './three.js-master/examples/jsm/webxr/VRButton.js';
 import { EffectComposer } from './three.js-master/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from './three.js-master/examples/jsm/postprocessing/RenderPass.js';
 import { ShaderPass } from './three.js-master/examples/jsm/postprocessing/ShaderPass.js';
-let camera, renderer, controls, water, ground, button;
+import { DeviceOrientationControls } from './three.js-master/examples/jsm/controls/DeviceOrientationControls.js';
+
+let camera, renderer, controls, water, ground, button,motionControls;
 let leftCamera, rightCamera;
 let composer, effect;
 
@@ -24,7 +26,8 @@ let params = {
     autorotate: false,
     crosseffect: false,
     cylindricalRatio: 2,
-    fov: 45
+    fov: 45,
+    Motion:false
 };
 
 
@@ -32,6 +35,7 @@ let gui = new GUI();
 gui.add(params, 'PointCloud').name('Point Cloud');
 gui.add(params, 'scenes', ['Tower Scene', 'Mosque Scene']);
 gui.add(params, 'VR').name('VR');
+gui.add(params, 'Motion').name('Device Motion');
 gui.add(params, 'eyeSeperation').name('Eye Seperation');
 gui.add(params, 'distortionstrength').name('Fish Eye Strength');
 gui.add(params, 'autorotate').name('Rotate Camera');
@@ -65,8 +69,6 @@ let Setup = function () {
     button.appendChild(VRButton.createButton(renderer));
     console.log(container.getElementsByTagName('a'));
     composer = new EffectComposer(renderer);
-
-
     effect = new ShaderPass(getDistortionShaderDefinition());
 
 }
@@ -76,12 +78,20 @@ let SceneSetup = function (currentScene) {
     camera.position.y = 5
     currentScene.background = new THREE.Color(0xdddddd);
 
+
+    
+    motionControls = new DeviceOrientationControls( camera ,renderer.domElement);
+    motionControls.update();
+
     controls = new OrbitControls(camera, renderer.domElement);
     controls.minDistance = 0.1;
     controls.maxDistance = 60;
     controls.maxPolarAngle = Math.PI / 2 - 0.1;
     controls.autoRotateSpeed = 2;
     controls.update();
+
+
+
 
     let ambientLight = new THREE.AmbientLight(0xffffff);
     currentScene.add(ambientLight);
@@ -221,8 +231,18 @@ let isMobileDevice = function () {
 }
 let animate = function () {
 
-
     renderer.setAnimationLoop(function () {
+        if(params['Motion']){
+            controls.enabled = false;
+            motionControls.enabled = true;
+            if(isMobileDevice) motionControls.update();
+        }
+        else{
+            controls.enabled = true;
+            motionControls.enabled = false;
+
+        }
+
         if (params['autorotate']) {
             controls.autoRotate = true;
             controls.update();
